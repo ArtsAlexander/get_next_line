@@ -6,17 +6,28 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/05/26 14:10:34 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/03 15:59:36 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-#define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include <stdlib.h>
-#include <limits.h>
-#include <
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8
+# endif
 
-int	get_next_line(int fd, char **line);
+# ifndef FD_MAX
+#  define FD_MAX 256
+# endif
+
+# include <stdlib.h>
+# include <limits.h>
+# include <unistd.h>
+
+int		get_next_line(int fd, char **line);
+char	*str_chr(char *s, int c);
+char	*str_join(char *s1, char *s2);
+char	*str_dup(char *s1);
 
 #endif
