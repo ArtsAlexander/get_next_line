@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/04 19:16:11 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/04 19:33:34 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		buf[ret] = '\0';
 		if (saved[fd] == NULL)
-			saved[fd] = str_dup(*buf);
+			saved[fd] = str_dup(buf);
 		else
 		{
 			tmp = str_join(saved[fd], buf);
