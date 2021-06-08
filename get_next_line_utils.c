@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/03 16:00:18 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/08 14:35:53 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ static size_t	str_len(char *s)
 	while (s[count])
 		count++;
 	return (count);
+}
+
+char	*strl_cpy(char *src, size_t dstsize)
+{
+	char	*dst;
+	size_t	i;
+
+	dst = malloc(sizeof(char) * dstsize + 1);
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i < dstsize - 1 && src[i] && dstsize)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (i < dstsize)
+		dst[i] = '\0';
+	return (dst);
 }
 
 static char	*strcat_join(char *str, char *s1, char *s2)
