@@ -11,8 +11,7 @@ int main(void)
 
 	while (get_next_line(fd, &tmp) != 0)
 	{
-		printf("%s", tmp);
+		printf("%s\n", tmp);
 	}
-
 	return 0;
 }

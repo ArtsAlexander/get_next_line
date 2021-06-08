@@ -6,43 +6,43 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/08 15:23:12 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/08 22:54:58 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 
-static int	putinline(char *saved_fd, char **line)
+static int	putinline(char **saved_fd, char **line)
 {
 	char	*temp;
 	size_t	i;
 
 	i = 0;
-	while (saved_fd[i] != '\n' && saved_fd[i] != '\0')
+	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
-	if (saved_fd[i] == '\n')
+	if ((*saved_fd)[i] == '\n')
 	{
-		*line = strl_cpy(saved_fd, i);
-		temp = str_dup(&saved_fd[i + 1]);
-		free(saved_fd);
-		saved_fd = temp;
+		*line = strl_cpy((*saved_fd), i);
+		temp = str_dup(&(*saved_fd)[i + 1]);
+		free(*saved_fd);
+		(*saved_fd) = temp;
 	}
 	else
 	{
-		*line = str_dup(saved_fd);
-		if (saved_fd != NULL)
+		*line = str_dup(*saved_fd);
+		if (*saved_fd != NULL)
 		{
-			free(saved_fd);
-			saved_fd = NULL;
+			free(*saved_fd);
+			*saved_fd = NULL;
 		}
 	}
 	return (1);
 }
 
-static int	output(char *saved_fd, char **line, int ret)
+static int	output(char **saved_fd, char **line, int ret)
 {
-	if (ret == 0 && saved_fd == NULL)
+	if (ret == 0 && *saved_fd == NULL)
 		return (0);
 	else
 		return (putinline(saved_fd, line));
@@ -57,12 +57,8 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || FD_MAX < fd || BUFFER_SIZE < 1)
 		return (-1);
-	ret = 1;
-	while (ret > 0)
+	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret < 0)
-			return (-1);
 		if (saved[fd] == NULL)
 			saved[fd] = str_dup(buf);
 		else
@@ -75,5 +71,7 @@ int	get_next_line(int fd, char **line)
 		if (str_chr(saved[fd], '\n'))
 			break ;
 	}
-	return (output(saved[fd], line, ret));
+	if (ret < 0)
+		return (-1);
+	return (output(&saved[fd], line, ret));
 }
