@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 11:21:10 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 11:34:03 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	output(char **saved_fd, char **line, int ret)
 {
 	if (ret == 0 && *saved_fd == NULL)
 		return (0);
+	if (ret < 0)
+		return (-1);
 	else
 		return (putinline(saved_fd, line));
 }
@@ -57,21 +59,21 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || FD_MAX < fd || BUFFER_SIZE < 1)
 		return (-1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	ret = read(fd, buf, BUFFER_SIZE);
+	while (ret > 0)
 	{
+		buf[ret] = '\0';
 		if (saved[fd] == NULL)
 			saved[fd] = str_dup(buf);
 		else
 		{
-			buf[ret] = '\0';
 			tmp = str_join(saved[fd], buf);
 			free(saved[fd]);
 			saved[fd] = tmp;
 		}
 		if (str_chr(saved[fd], '\n'))
 			break ;
+		ret = read(fd, buf, BUFFER_SIZE);
 	}
-	if (ret < 0)
-		return (-1);
 	return (output(&saved[fd], line, ret));
 }
