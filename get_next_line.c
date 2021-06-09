@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 20:20:52 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 21:25:18 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	putinline(char **saved_fd, char **line)
 {
 	char	*temp;
 	size_t	i;
-	
+
 	i = 0;
 	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
