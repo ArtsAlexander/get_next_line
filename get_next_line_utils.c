@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:47:03 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 21:18:06 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*str_dup(char *s1)
 {
 	size_t	i;
 	char	*new;
-	
+
 	if (!s1)
 		return (NULL);
 	new = (char *) malloc(str_len(s1) + 1);
