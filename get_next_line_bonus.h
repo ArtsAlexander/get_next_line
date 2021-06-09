@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:38:38 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:47:57 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 8
-# endif 
+# endif
 
 # ifndef FD_MAX
 #  define FD_MAX 256

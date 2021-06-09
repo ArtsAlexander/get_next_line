@@ -6,12 +6,11 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:11:57 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:47:03 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*str_chr(char *s, int c)
 {
