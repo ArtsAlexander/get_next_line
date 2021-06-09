@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 11:27:29 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:13:10 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int		get_next_line(int fd, char **line);
 char	*str_chr(char *s, int c);
 char	*str_join(char *s1, char *s2);
 char	*str_dup(char *s1);
-char	*sub_str(char *s, unsigned int start, size_t len);
+char	*sub_str(char *s, size_t len);
 
 #endif

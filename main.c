@@ -2,16 +2,25 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
 	int fd;
 	char *tmp;
+	int ret;
 
-	fd = open("test.txt", O_RDONLY);
-
-	while (get_next_line(fd, &tmp) != 0)
+	fd = 0;
+	if (argc == 2)
 	{
-		printf("%s\n", tmp);
+		fd = open(argv[1], O_RDONLY);
+	}
+
+	ret = 1;
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &tmp);
+		printf("R %d | %s\n", ret, tmp);
+		free(tmp);
+		tmp = NULL;
 	}
 	return 0;
 }

@@ -6,11 +6,12 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 11:24:28 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:11:57 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*str_chr(char *s, int c)
 {
@@ -38,7 +39,7 @@ static size_t	str_len(char *s)
 	return (count);
 }
 
-char	*sub_str(char *s, unsigned int start, size_t len)
+char	*sub_str(char *s, size_t len)
 {
 	unsigned int	i;
 	unsigned int	s_len;
@@ -47,14 +48,6 @@ char	*sub_str(char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	s_len = str_len(s);
-	if (s_len < start)
-	{
-		str = malloc(sizeof(char) * 1);
-		if (!str)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
 	if (s_len < len)
 		len = s_len;
 	str = malloc(sizeof(char) * (len + 1));
@@ -62,7 +55,7 @@ char	*sub_str(char *s, unsigned int start, size_t len)
 		return (NULL);
 	i = -1;
 	while (++i < len)
-		str[i] = s[start + i];
+		str[i] = s[i];
 	str[i] = 0;
 	return (str);
 }
@@ -106,7 +99,9 @@ char	*str_dup(char *s1)
 {
 	size_t	i;
 	char	*new;
-
+	
+	if (!s1)
+		return (NULL);
 	new = (char *) malloc(str_len(s1) + 1);
 	if (!new)
 		return (NULL);
