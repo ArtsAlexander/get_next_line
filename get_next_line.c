@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 11:34:03 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 11:38:34 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	putinline(char **saved_fd, char **line)
 	else
 	{
 		*line = str_dup(*saved_fd);
-		if (*saved_fd != NULL)
+		if (*saved_fd != NULL && saved_fd != NULL)
 		{
 			free(*saved_fd);
 			*saved_fd = NULL;
