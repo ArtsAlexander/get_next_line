@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/08 22:54:58 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 11:21:10 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	putinline(char **saved_fd, char **line)
 		i++;
 	if ((*saved_fd)[i] == '\n')
 	{
-		*line = strl_cpy((*saved_fd), i);
+		*line = sub_str((*saved_fd), 0, i);
 		temp = str_dup(&(*saved_fd)[i + 1]);
 		free(*saved_fd);
-		(*saved_fd) = temp;
+		*saved_fd = temp;
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/08 14:35:53 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/09 11:20:16 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,33 @@ static size_t	str_len(char *s)
 	return (count);
 }
 
-char	*strl_cpy(char *src, size_t dstsize)
+char	*sub_str(char const *s, unsigned int start, size_t len)
 {
-	char	*dst;
-	size_t	i;
+	unsigned int	i;
+	unsigned int	s_len;
+	char			*str;
 
-	dst = malloc(sizeof(char) * dstsize + 1);
-	if (!dst)
+	if (!s)
 		return (NULL);
-	i = 0;
-	while (i < dstsize - 1 && src[i] && dstsize)
+	s_len = str_len(s);
+	if (s_len < start)
 	{
-		dst[i] = src[i];
-		i++;
+		str = malloc(sizeof(char) * 1);
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
 	}
-	if (i < dstsize)
-		dst[i] = '\0';
-	return (dst);
+	if (s_len < len)
+		len = s_len;
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		str[i] = s[start + i];
+	str[i] = 0;
+	return (str);
 }
 
 static char	*strcat_join(char *str, char *s1, char *s2)
