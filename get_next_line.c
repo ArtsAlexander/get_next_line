@@ -6,26 +6,17 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:35:18 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/10 13:58:49 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// void pointNULL(char **saved_fd)
-// {
-// 	if (saved_fd != NULL && *saved_fd != NULL)
-// 	{
-// 		free(*saved_fd);
-// 		*saved_fd = NULL;
-// 	}
-// 	return ;
-// }
-
 static int	putinline(char **saved_fd, char **line)
 {
 	char	*temp;
 	size_t	i;
+
 	i = 0;
 	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
@@ -45,16 +36,6 @@ static int	putinline(char **saved_fd, char **line)
 	}
 	return (1);
 }
-
-// static int	output(char **saved_fd, char **line, int ret)
-// {
-// 	if (ret == 0 && *saved_fd == NULL)
-// 		return (0);
-// 	if (ret < 0)
-// 		return (-1);
-// 	else
-// 		return (putinline(saved_fd, line));
-// }
 
 int	get_next_line(int fd, char **line)
 {

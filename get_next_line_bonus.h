@@ -6,12 +6,15 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:47:57 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/10 13:59:39 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 8
@@ -20,10 +23,6 @@
 # ifndef FD_MAX
 #  define FD_MAX 256
 # endif
-
-# include <stdlib.h>
-# include <limits.h>
-# include <unistd.h>
 
 int		get_next_line(int fd, char **line);
 char	*str_chr(char *s, int c);

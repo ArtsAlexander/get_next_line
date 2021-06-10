@@ -6,11 +6,11 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/09 17:47:16 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/10 14:06:15 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*str_chr(char *s, int c)
 {
@@ -59,46 +59,34 @@ char	*sub_str(char *s, size_t len)
 	return (str);
 }
 
-static char	*strcat_join(char *str, char *s1, char *s2)
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		str[i++] = s2[j];
-	str[i] = '\0';
-	return (str);
-}
-
 char	*str_join(char *s1, char *s2)
 {
-	char	*str;
-	size_t	t_len;
+	size_t	len;
+	size_t	i;
+	char	*cat;
 
-	t_len = 0;
-	if (!s1 || !s2)
+	if (s1 == NULL)
+		return ((char *)s2);
+	if (s2 == NULL)
+		return ((char *)s1);
+	len = str_len(s1) + str_len(s2);
+	i = 0;
+	cat = (char *)malloc(sizeof(char) * (len + 1));
+	if (cat == NULL)
 		return (NULL);
-	if (s1 && s2)
-	{
-		t_len = str_len(s1) + str_len(s2) + 1;
-		str = malloc(sizeof(char) * t_len);
-		if (!str)
-			return (NULL);
-		strcat_join(str, s1, s2);
-		return (str);
-	}
-	return (NULL);
+	while (*s1 != '\0')
+		cat[i++] = *s1++;
+	while (*s2 != '\0')
+		cat[i++] = *s2++;
+	cat[i] = '\0';
+	return (cat);
 }
 
 char	*str_dup(char *s1)
 {
 	size_t	i;
 	char	*new;
-	
+
 	if (!s1)
 		return (NULL);
 	new = (char *) malloc(str_len(s1) + 1);
