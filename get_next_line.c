@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/11 00:10:40 by aarts            ###   ########.fr       */
+/*   Updated: 2021/06/28 18:59:13 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_next_line(int fd, char **line)
 	char		*tmp;
 	int			ret;
 
-	if (fd < 0 || line == NULL || FD_MAX < fd || BUFFER_SIZE < 1 || read(fd, buf, 0) == -1)
+	if (fd < 0 || line == NULL || BUFFER_SIZE < 1 || read(fd, buf, 0) == -1)
 		return (-1);
 	ret = 1;
 	while (ret > 0)

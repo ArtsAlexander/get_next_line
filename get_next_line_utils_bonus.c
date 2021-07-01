@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/06/10 14:25:29 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/01 17:09:54 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*str_chr(char *s, int c)
 {
 	char	*pointer;
 
 	pointer = (char *)s;
-	while (*pointer)
+	while (pointer && *pointer)
 	{
 		if (*pointer == (char) c)
 			return (pointer);
 		pointer++;
 	}
-	if (*pointer == 0 && (char) c == 0)
+	if (pointer && *pointer == 0 && (char) c == 0)
 		return (pointer);
 	return (NULL);
 }
@@ -33,7 +33,7 @@ static size_t	str_len(char *s)
 	size_t	count;
 
 	count = 0;
-	while (s[count])
+	while (s && s[count])
 		count++;
 	return (count);
 }
@@ -59,29 +59,6 @@ char	*sub_str(char *s, size_t len)
 	return (str);
 }
 
-char	*str_join(char *s1, char *s2)
-{
-	size_t	len;
-	size_t	i;
-	char	*cat;
-
-	if (s1 == NULL)
-		return ((char *)s2);
-	if (s2 == NULL)
-		return ((char *)s1);
-	len = str_len(s1) + str_len(s2);
-	i = 0;
-	cat = (char *)malloc(sizeof(char) * (len + 1));
-	if (cat == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		cat[i++] = *s1++;
-	while (*s2 != '\0')
-		cat[i++] = *s2++;
-	cat[i] = '\0';
-	return (cat);
-}
-
 char	*str_dup(char *s1)
 {
 	size_t	i;
@@ -100,4 +77,27 @@ char	*str_dup(char *s1)
 	}
 	new[i] = 0;
 	return (new);
+}
+
+char	*str_join(char *s1, char *s2)
+{
+	size_t	len;
+	size_t	i;
+	char	*cat;
+
+	if (s1 == NULL)
+		return (strdup(s2));
+	if (s2 == NULL)
+		return (strdup(s1));
+	len = str_len(s1) + str_len(s2);
+	i = 0;
+	cat = (char *)malloc(sizeof(char) * (len + 1));
+	if (cat == NULL)
+		return (NULL);
+	while (*s1 != '\0')
+		cat[i++] = *s1++;
+	while (*s2 != '\0')
+		cat[i++] = *s2++;
+	cat[i] = '\0';
+	return (cat);
 }
