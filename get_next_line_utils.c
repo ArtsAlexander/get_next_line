@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/01 17:09:54 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/01 19:20:22 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ char	*str_join(char *s1, char *s2)
 	char	*cat;
 
 	if (s1 == NULL)
-		return (strdup(s2));
+		return (str_dup(s2));
 	if (s2 == NULL)
-		return (strdup(s1));
+		return (str_dup(s1));
 	len = str_len(s1) + str_len(s2);
 	i = 0;
 	cat = (char *)malloc(sizeof(char) * (len + 1));
