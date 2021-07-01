@@ -6,11 +6,11 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/01 19:10:49 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/01 19:16:48 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	putinline(char **saved_fd, char **line)
 {
