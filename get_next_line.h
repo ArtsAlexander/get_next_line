@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 17:16:44 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 19:58:13 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
+#  define BUFFER_SIZE 8
 # endif 
 
 # ifndef FD_MAX

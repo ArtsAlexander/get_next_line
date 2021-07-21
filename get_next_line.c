@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 18:55:23 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 19:59:56 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*ft_free(char *str)
 	return (NULL);
 }
 
-static char	*putinline2(char **saved_fd, char *line)
+static char	*putinline_final(char **saved_fd, char *line)
 {
 	line = str_dup(*saved_fd);
 	if (!line)
@@ -37,6 +37,7 @@ static char	*putinline(char **saved_fd)
 	i = 0;
 	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
+	line = NULL;
 	if ((*saved_fd)[i] == '\n')
 	{
 		line = sub_str((*saved_fd), i + 1);
@@ -49,15 +50,42 @@ static char	*putinline(char **saved_fd)
 		*saved_fd = temp;
 	}
 	else
-		return (putinline2(saved_fd, line));
+		return (putinline_final(saved_fd, line));
 	return(line);
+}
+
+static int	gnl_loop(char **saved, char *buf, int fd, int ret)
+{
+	char	*tmp;
+	ret = read(fd, buf, BUFFER_SIZE);
+	buf[ret] = '\0';
+	if (saved[fd] == NULL)
+	{
+		saved[fd] = str_dup(buf);
+		if (!saved[fd] || ret == 0)
+		{
+			free(saved[fd]);
+			return (-1);
+		}
+	}
+	else
+	{
+		tmp = str_join(saved[fd], buf);
+		if (!tmp)
+		{
+			free(tmp);
+			return (-1);
+		}
+		free(saved[fd]);
+		saved[fd] = tmp;
+	}
+	return (ret);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*saved[FD_MAX];
 	char		buf[BUFFER_SIZE + 1];
-	char		*tmp;
 	int			ret;
 	
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, buf, 0) == -1)
@@ -65,22 +93,9 @@ char	*get_next_line(int fd)
 	ret = 1;
 	while (ret > 0)
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
-		if (saved[fd] == NULL)
-		{
-			saved[fd] = str_dup(buf);
-			if (!saved[fd] || ret == 0)
-				return (ft_free(saved[fd]));
-		}
-		else
-		{
-			tmp = str_join(saved[fd], buf);
-			if (!tmp)
-				return (ft_free(tmp));
-			free(saved[fd]);
-			saved[fd] = tmp;
-		}
+		ret = gnl_loop(saved, buf, fd, ret);
+		if (ret == -1)
+			return (NULL);
 		if (str_chr(saved[fd], '\n'))
 			break ;
 	}
