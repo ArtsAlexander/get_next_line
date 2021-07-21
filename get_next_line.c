@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 20:05:36 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 20:06:34 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*putinline(char **saved_fd)
 static int	gnl_loop(char **saved, char *buf, int fd, int ret)
 {
 	char	*tmp;
-	
+
 	ret = read(fd, buf, BUFFER_SIZE);
 	buf[ret] = '\0';
 	if (saved[fd] == NULL)
