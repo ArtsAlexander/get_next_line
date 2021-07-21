@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 19:59:56 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 20:05:36 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ static char	*putinline(char **saved_fd)
 	}
 	else
 		return (putinline_final(saved_fd, line));
-	return(line);
+	return (line);
 }
 
 static int	gnl_loop(char **saved, char *buf, int fd, int ret)
 {
 	char	*tmp;
+	
 	ret = read(fd, buf, BUFFER_SIZE);
 	buf[ret] = '\0';
 	if (saved[fd] == NULL)
@@ -87,7 +88,7 @@ char	*get_next_line(int fd)
 	static char	*saved[FD_MAX];
 	char		buf[BUFFER_SIZE + 1];
 	int			ret;
-	
+
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, buf, 0) == -1)
 		return (NULL);
 	ret = 1;
