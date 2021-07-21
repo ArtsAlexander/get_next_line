@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 20:06:34 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 20:19:01 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*putinline_final(char **saved_fd, char *line)
 {
 	line = str_dup(*saved_fd);
 	if (!line)
-		return (ft_free(line));
+		return (ft_free(line)); //something here doesnt seem right, too many frees, some unused
 	free(*saved_fd);
 	*saved_fd = NULL;
 	return (line);
@@ -37,7 +37,7 @@ static char	*putinline(char **saved_fd)
 	i = 0;
 	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
-	line = NULL;
+	line = NULL; //bc otherwise we can end with unused/uninitialized line
 	if ((*saved_fd)[i] == '\n')
 	{
 		line = sub_str((*saved_fd), i + 1);
