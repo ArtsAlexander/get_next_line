@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:14:01 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 16:40:00 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/21 17:24:28 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*str_chr(char *s, int c)
 			return (pointer);
 		pointer++;
 	}
-	if (*pointer == 0 && (char) c == 0)
+	if (pointer && *pointer == 0 && (char) c == 0)
 		return (pointer);
 	return (NULL);
 }
@@ -33,7 +33,7 @@ static size_t	str_len(char *s)
 	size_t	count;
 
 	count = 0;
-	while (s[count])
+	while (s && s[count])
 		count++;
 	return (count);
 }
@@ -59,6 +59,26 @@ char	*sub_str(char *s, size_t len)
 	return (str);
 }
 
+char	*str_dup(char *s1)
+{
+	size_t	i;
+	char	*new;
+
+	if (!s1)
+		return (NULL);
+	new = (char *) malloc(str_len(s1) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	new[i] = 0;
+	return (new);
+}
+
 char	*str_join(char *s1, char *s2)
 {
 	size_t	len;
@@ -80,24 +100,4 @@ char	*str_join(char *s1, char *s2)
 		cat[i++] = *s2++;
 	cat[i] = '\0';
 	return (cat);
-}
-
-char	*str_dup(char *s1)
-{
-	size_t	i;
-	char	*new;
-
-	if (!s1)
-		return (NULL);
-	new = (char *) malloc(str_len(s1) + 1);
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		new[i] = s1[i];
-		i++;
-	}
-	new[i] = 0;
-	return (new);
 }
