@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 13:12:15 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/21 20:19:01 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/22 17:39:03 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,27 @@
 static char	*ft_free(char *str)
 {
 	free(str);
+	str = NULL;
 	return (NULL);
 }
 
-static char	*putinline_final(char **saved_fd, char *line)
+static char	*putinline_final(char **saved_fd)
 {
+	char	*line;
+	
+	if (!(*saved_fd)[0])
+	{
+		*saved_fd = ft_free(*saved_fd);
+		return (*saved_fd);
+	}
 	line = str_dup(*saved_fd);
 	if (!line)
-		return (ft_free(line)); //something here doesnt seem right, too many frees, some unused
-	free(*saved_fd);
-	*saved_fd = NULL;
+	{
+		if (*saved_fd)
+			*saved_fd = ft_free(*saved_fd);
+		return (ft_free(line));
+	}
+	*saved_fd = ft_free(*saved_fd);
 	return (line);
 }
 
@@ -37,7 +48,6 @@ static char	*putinline(char **saved_fd)
 	i = 0;
 	while ((*saved_fd)[i] != '\n' && (*saved_fd)[i] != '\0')
 		i++;
-	line = NULL; //bc otherwise we can end with unused/uninitialized line
 	if ((*saved_fd)[i] == '\n')
 	{
 		line = sub_str((*saved_fd), i + 1);
@@ -50,7 +60,7 @@ static char	*putinline(char **saved_fd)
 		*saved_fd = temp;
 	}
 	else
-		return (putinline_final(saved_fd, line));
+		return (putinline_final(saved_fd));
 	return (line);
 }
 
@@ -60,14 +70,13 @@ static int	gnl_loop(char **saved, char *buf, int fd, int ret)
 
 	ret = read(fd, buf, BUFFER_SIZE);
 	buf[ret] = '\0';
-	if (saved[fd] == NULL)
+	if (!saved[fd])
 	{
-		saved[fd] = str_dup(buf);
-		if (!saved[fd] || ret == 0)
-		{
-			free(saved[fd]);
+		if (!buf[0])
 			return (-1);
-		}
+		saved[fd] = str_dup(buf);
+		if (!saved[fd])
+			return (-1);
 	}
 	else
 	{
