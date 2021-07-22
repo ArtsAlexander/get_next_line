@@ -6,7 +6,7 @@
 /*   By: aarts <aarts@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:08:40 by aarts             #+#    #+#             */
-/*   Updated: 2021/07/22 17:53:41 by aarts            ###   ########.fr       */
+/*   Updated: 2021/07/22 23:24:44 by aarts            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 8
 # endif 
-
 
 char	*get_next_line(int fd);
 char	*str_chr(char *s, int c);
